@@ -1,7 +1,7 @@
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 from fastapi import HTTPException, status, Depends
 
-from auth.auth_users import authorized_users, pwd_context
+from app.auth.auth_users import authorized_users, pwd_context
 
 security = HTTPBasic()
 

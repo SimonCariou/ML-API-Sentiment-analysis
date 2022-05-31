@@ -1,12 +1,12 @@
 from fastapi import FastAPI, HTTPException, Request, status, Depends
 from fastapi.responses import JSONResponse
 
-from auth.auth_rules import get_auth_status, get_admin_auth_status
+from app.auth.auth_rules import get_auth_status, get_admin_auth_status
 import joblib
 import os
 
-from utils import finalize_preprocess
-from constants import *
+from app.utils import finalize_preprocess
+from app.constants import *
 
 #from pydantic import BaseModel
 #from typing import Optional, List

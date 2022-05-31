@@ -1,11 +1,11 @@
-MODELS_DIRECTORY = "models"
+MODELS_DIRECTORY = "app/models"
 LOG_REG_FILENAME = "logreg_model.sav"
 DECISION_TREE_FILENAME = "dec_tree_model.sav"
 MULTINOMIAL_NAIVE_BAYES_FILENAME = "multi_nb_model.sav"
 SGDC_FILENAME = "sgdc_model.sav"
 TFIDF_VECTORIZER_FILEMANE = "tfidf_vectorizer.sav"
 
-PERFORMANCES_DIRECTORY = "performances"
+PERFORMANCES_DIRECTORY = "app/performances"
 LOG_REG_PERF_FILENAME = "logreg_performances.sav"
 DECISION_TREE_PERF_FILENAME = "dec_tree_performances.sav"
 MULTINOMIAL_NAIVE_BAYES_PERF_FILENAME = "multi_nb_performances.sav"
