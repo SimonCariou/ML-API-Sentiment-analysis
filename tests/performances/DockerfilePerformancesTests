@@ -1,0 +1,11 @@
+FROM debian:latest
+
+RUN apt-get update && apt-get install python3-pip -y && pip3 install requests
+
+ADD tests_performances.py /home/api_tests/performances/tests_performances.py
+
+WORKDIR /home/api_tests/performances
+
+EXPOSE 8000
+
+CMD python3 tests_performances.py

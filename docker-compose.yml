@@ -7,3 +7,21 @@ services:
       dockerfile: Dockerfile
     image: api-ratings:latest
     network_mode: "host"
+
+
+  tests-ratings:
+    container_name: tests-api-ratings
+    build:
+      context: tests/ratings
+      dockerfile: DockerfileRatingsTests
+    image: tests-api-ratings:latest
+    network_mode: "host"
+
+
+  tests-performances:
+    container_name: tests-api-performances
+    build:
+      context: tests/performances
+      dockerfile: DockerfilePerformancesTests
+    image: tests-api-performances:latest
+    network_mode: "host"
