@@ -12,4 +12,6 @@ COPY app/ /home/api/app
 
 EXPOSE 8000
 
-CMD ["uvicorn", "app.main:api", "--port", "8000"]
+ENTRYPOINT ["uvicorn"]
+
+CMD ["app.main:api", "--host", "0.0.0.0"]

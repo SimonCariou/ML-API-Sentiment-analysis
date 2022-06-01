@@ -1,3 +1,5 @@
-sudo docker image build -t api-ratings:latest .
+docker image build -t api-ratings:latest .
 
-sudo docker run --rm --network host api-ratings:latest
+docker run --rm --network host api-ratings:latest
+
+docker-compose up --build
