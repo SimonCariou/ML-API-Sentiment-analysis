@@ -9,8 +9,10 @@ test_user = {
 
 performances_metrics_measured = ["accuracy_score", "f1_score", "recall_score", "precision_score"]
 
+
+#LOGISTIC REGRESSION
 def test_get_performances_logistic_regression_not_authenticated():
-    """ Check that a non authenticated call is successfully cached
+    """ Check that a non authenticated call is successfully catched
     """
     response = requests.get(
         url='http://127.0.0.1:8000/performances/logistic_regression'
@@ -18,7 +20,6 @@ def test_get_performances_logistic_regression_not_authenticated():
     assert response.status_code == 401
     assert response.json() == {"detail":"Not authenticated"}
 
-#LOGISTIC REGRESSION
 def test_get_performances_logistic_regression_wrong_authentication():
     response = requests.get(
         url='http://127.0.0.1:8000/performances/logistic_regression',
@@ -43,7 +44,7 @@ def test_get_performances_logistic_regression_authenticated_range_metrics():
     performances_list = [response.json()[metric] for metric in performances_metrics_measured]
 
     assert response.status_code == 200
-    assert all(metric >= 0 and metric <=1 and metric != None and isinstance(metric, float) for metric in performances_list)
+    assert check_metrics_value_range(performances_list)
 
 def test_check_returned_metrics_are_in_expected_list_of_metrics_logistic_regression():
     response = requests.get(
@@ -58,6 +59,15 @@ def test_check_returned_metrics_are_in_expected_list_of_metrics_logistic_regress
 
 
 #DECISION TREE CLASSIFIER
+def test_get_performances_decision_tree_classifier_not_authenticated():
+    """ Check that a non authenticated call is successfully catched
+    """
+    response = requests.get(
+        url='http://127.0.0.1:8000/performances/decision_tree_classifier'
+    )
+    assert response.status_code == 401
+    assert response.json() == {"detail":"Not authenticated"}
+
 def test_get_performances_decision_tree_classifier_wrong_authentication():
     response = requests.get(
         url='http://127.0.0.1:8000/performances/decision_tree_classifier',
@@ -96,6 +106,15 @@ def test_check_returned_metrics_are_in_expected_list_of_metrics_decision_tree_cl
     assert check_metrics_list_returned(response_keys)
 
 #MULTINOMIAL_NB
+def test_get_performances_multinomial_nb_not_authenticated():
+    """ Check that a non authenticated call is successfully catched
+    """
+    response = requests.get(
+        url='http://127.0.0.1:8000/performances/multinomial_nb'
+    )
+    assert response.status_code == 401
+    assert response.json() == {"detail":"Not authenticated"}
+
 def test_get_performances_multinomial_nb_wrong_authentication():
     response = requests.get(
         url='http://127.0.0.1:8000/performances/multinomial_nb',
@@ -135,6 +154,15 @@ def test_check_returned_metrics_are_in_expected_list_of_metrics_multinomial_nb()
     assert check_metrics_list_returned(response_keys)
 
 #STOCHASTIC GRADIENT CLASSIFIER
+def test_get_performances_sgd_classifier_not_authenticated():
+    """ Check that a non authenticated call is successfully catched
+    """
+    response = requests.get(
+        url='http://127.0.0.1:8000/performances/sgd_classifier'
+    )
+    assert response.status_code == 401
+    assert response.json() == {"detail":"Not authenticated"}
+
 def test_get_performances_sgd_classifier_wrong_authentication():
     response = requests.get(
         url='http://127.0.0.1:8000/performances/sgd_classifier',
