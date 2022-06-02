@@ -25,7 +25,7 @@ def test_get_root_result():
 
 #LOGISTIC REGRESSION
 def test_get_ratings_logistic_regression_not_authenticated():
-    """ Check that a non authenticated call is successfully catched
+    """ Check that a non authenticated call is successfully caught
     """
     response = requests.get(
         url='http://127.0.0.1:8000/ratings/logistic_regression'
@@ -61,7 +61,7 @@ def test_get_ratings_logistic_regression_authenticated_are_valid():
 
 #DECISION TREE CLASSIFIER
 def test_get_ratings_decision_tree_classifier_not_authenticated():
-    """ Check that a non authenticated call is successfully catched
+    """ Check that a non authenticated call is successfully caught
     """
     response = requests.get(
         url='http://127.0.0.1:8000/ratings/decision_tree_classifier'
@@ -96,7 +96,7 @@ def test_get_ratings_decision_tree_classifier_authenticated_are_valid():
 
 #MULTINOMIAL_NB
 def test_get_ratings_multinomial_nb_not_authenticated():
-    """ Check that a non authenticated call is successfully catched
+    """ Check that a non authenticated call is successfully caught
     """
     response = requests.get(
         url='http://127.0.0.1:8000/ratings/multinomial_nb'
@@ -132,7 +132,7 @@ def test_get_ratings_multinomial_nb_authenticated_are_valid():
 
 #STOCHASTIC GRADIENT CLASSIFIER
 def test_get_ratings_sgd_classifier_not_authenticated():
-    """ Check that a non authenticated call is successfully catched
+    """ Check that a non authenticated call is successfully caught
     """
     response = requests.get(
         url='http://127.0.0.1:8000/ratings/sgd_classifier'

@@ -12,7 +12,7 @@ performances_metrics_measured = ["accuracy_score", "f1_score", "recall_score", "
 
 #LOGISTIC REGRESSION
 def test_get_performances_logistic_regression_not_authenticated():
-    """ Check that a non authenticated call is successfully catched
+    """ Check that a non authenticated call is successfully caught
     """
     response = requests.get(
         url='http://127.0.0.1:8000/performances/logistic_regression'
@@ -60,7 +60,7 @@ def test_check_returned_metrics_are_in_expected_list_of_metrics_logistic_regress
 
 #DECISION TREE CLASSIFIER
 def test_get_performances_decision_tree_classifier_not_authenticated():
-    """ Check that a non authenticated call is successfully catched
+    """ Check that a non authenticated call is successfully caught
     """
     response = requests.get(
         url='http://127.0.0.1:8000/performances/decision_tree_classifier'
@@ -107,7 +107,7 @@ def test_check_returned_metrics_are_in_expected_list_of_metrics_decision_tree_cl
 
 #MULTINOMIAL_NB
 def test_get_performances_multinomial_nb_not_authenticated():
-    """ Check that a non authenticated call is successfully catched
+    """ Check that a non authenticated call is successfully caught
     """
     response = requests.get(
         url='http://127.0.0.1:8000/performances/multinomial_nb'
@@ -155,7 +155,7 @@ def test_check_returned_metrics_are_in_expected_list_of_metrics_multinomial_nb()
 
 #STOCHASTIC GRADIENT CLASSIFIER
 def test_get_performances_sgd_classifier_not_authenticated():
-    """ Check that a non authenticated call is successfully catched
+    """ Check that a non authenticated call is successfully caught
     """
     response = requests.get(
         url='http://127.0.0.1:8000/performances/sgd_classifier'
