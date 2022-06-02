@@ -34,6 +34,8 @@ def test_get_ratings_logistic_regression_not_authenticated():
     assert response.json() == {"detail":"Not authenticated"}
 
 def test_get_ratings_logistic_regression_wrong_authentication():
+    """ Check that a wrong username/password combination is successfully caught
+    """
     response = requests.get(
         url='http://127.0.0.1:8000/ratings/logistic_regression',
         auth = HTTPBasicAuth(test_user["username"], "wrong password")
@@ -43,6 +45,8 @@ def test_get_ratings_logistic_regression_wrong_authentication():
 
 
 def test_get_ratings_logistic_regression_authenticated_no_parameters_given():
+    """ Check that a call without the sencence as a parameter is successfully caught and thows an error 422
+    """
     response = requests.get(
         url='http://127.0.0.1:8000/ratings/logistic_regression',
         auth = HTTPBasicAuth(test_user["username"], test_user["password"])
@@ -50,6 +54,11 @@ def test_get_ratings_logistic_regression_authenticated_no_parameters_given():
     assert response.status_code == 422
 
 def test_get_ratings_logistic_regression_authenticated_are_valid():
+    """ This test performs 5 requests, taking the sentences in the sentences dictionnary (defined at the top of the file), and  
+    check that after performing well built requests, the responses meet the following criterias:
+    - the status code of all of the requests is 200
+    - the ratings obtained in the responses are ints and are either 0, 1, 2, 3, 4 or 5
+    """
     responses = [requests.get( 
             url = 'http://127.0.0.1:8000/ratings/logistic_regression',
             auth = HTTPBasicAuth(test_user["username"], test_user["password"]),
@@ -70,6 +79,8 @@ def test_get_ratings_decision_tree_classifier_not_authenticated():
     assert response.json() == {"detail":"Not authenticated"}
 
 def test_get_ratings_decision_tree_classifier_wrong_authentication():
+    """ Check that a wrong username/password combination is successfully caught
+    """
     response = requests.get(
         url='http://127.0.0.1:8000/ratings/decision_tree_classifier',
         auth = HTTPBasicAuth(test_user["username"], "wrong password")
@@ -78,6 +89,8 @@ def test_get_ratings_decision_tree_classifier_wrong_authentication():
     assert response.json() == {'detail': 'Incorrect email or password'}
 
 def test_get_ratings_decision_tree_classifier_authenticated_no_parameters_given():
+    """ Check that a call without the sencence as a parameter is successfully caught and thows an error 422
+    """
     response = requests.get(
         url='http://127.0.0.1:8000/ratings/decision_tree_classifier',
         auth = HTTPBasicAuth(test_user["username"], test_user["password"])
@@ -85,6 +98,11 @@ def test_get_ratings_decision_tree_classifier_authenticated_no_parameters_given(
     assert response.status_code == 422
 
 def test_get_ratings_decision_tree_classifier_authenticated_are_valid():
+    """ This test performs 5 requests, taking the sentences in the sentences dictionnary (defined at the top of the file), and  
+    check that after performing well built requests, the responses meet the following criterias:
+    - the status code of all of the requests is 200
+    - the ratings obtained in the responses are ints and are either 0, 1, 2, 3, 4 or 5
+    """
     responses = [requests.get( 
             url = 'http://127.0.0.1:8000/ratings/decision_tree_classifier',
             auth = HTTPBasicAuth(test_user["username"], test_user["password"]),
@@ -105,6 +123,8 @@ def test_get_ratings_multinomial_nb_not_authenticated():
     assert response.json() == {"detail":"Not authenticated"}
 
 def test_get_ratings_multinomial_nb_wrong_authentication():
+    """ Check that a wrong username/password combination is successfully caught
+    """
     response = requests.get(
         url='http://127.0.0.1:8000/ratings/multinomial_nb',
         auth = HTTPBasicAuth(test_user["username"], "wrong password")
@@ -114,6 +134,8 @@ def test_get_ratings_multinomial_nb_wrong_authentication():
 
 
 def test_get_ratings_multinomial_nb_authenticated_no_parameters_given():
+    """ Check that a call without the sencence as a parameter is successfully caught and thows an error 422
+    """
     response = requests.get(
         url='http://127.0.0.1:8000/ratings/multinomial_nb',
         auth = HTTPBasicAuth(test_user["username"], test_user["password"])
@@ -121,6 +143,11 @@ def test_get_ratings_multinomial_nb_authenticated_no_parameters_given():
     assert response.status_code == 422
 
 def test_get_ratings_multinomial_nb_authenticated_are_valid():
+    """ This test performs 5 requests, taking the sentences in the sentences dictionnary (defined at the top of the file), and  
+    check that after performing well built requests, the responses meet the following criterias:
+    - the status code of all of the requests is 200
+    - the ratings obtained in the responses are ints and are either 0, 1, 2, 3, 4 or 5
+    """
     responses = [requests.get( 
             url = 'http://127.0.0.1:8000/ratings/multinomial_nb',
             auth = HTTPBasicAuth(test_user["username"], test_user["password"]),
@@ -141,6 +168,8 @@ def test_get_ratings_sgd_classifier_not_authenticated():
     assert response.json() == {"detail":"Not authenticated"}
 
 def test_get_ratings_sgd_classifier_wrong_authentication():
+    """ Check that a wrong username/password combination is successfully caught
+    """
     response = requests.get(
         url='http://127.0.0.1:8000/ratings/sgd_classifier',
         auth = HTTPBasicAuth(test_user["username"], "wrong password")
@@ -149,6 +178,8 @@ def test_get_ratings_sgd_classifier_wrong_authentication():
     assert response.json() == {'detail': 'Incorrect email or password'}
 
 def test_get_ratings_sgd_classifier_authenticated_no_parameters_given():
+    """ Check that a call without the sencence as a parameter is successfully caught and thows an error 422
+    """
     response = requests.get(
         url='http://127.0.0.1:8000/ratings/sgd_classifier',
         auth = HTTPBasicAuth(test_user["username"], test_user["password"])
@@ -156,6 +187,11 @@ def test_get_ratings_sgd_classifier_authenticated_no_parameters_given():
     assert response.status_code == 422
 
 def test_get_ratings_sgd_classifier_authenticated_are_valid():
+    """ This test performs 5 requests, taking the sentences in the sentences dictionnary (defined at the top of the file), and  
+    check that after performing well built requests, the responses meet the following criterias:
+    - the status code of all of the requests is 200
+    - the ratings obtained in the responses are ints and are either 0, 1, 2, 3, 4 or 5
+    """
     responses = [requests.get( 
             url = 'http://127.0.0.1:8000/ratings/sgd_classifier',
             auth = HTTPBasicAuth(test_user["username"], test_user["password"]),

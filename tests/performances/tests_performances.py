@@ -21,6 +21,8 @@ def test_get_performances_logistic_regression_not_authenticated():
     assert response.json() == {"detail":"Not authenticated"}
 
 def test_get_performances_logistic_regression_wrong_authentication():
+    """ Check that a wrong username/password combination is successfully caught
+    """
     response = requests.get(
         url='http://127.0.0.1:8000/performances/logistic_regression',
         auth = HTTPBasicAuth(test_user["username"], "wrong password")
@@ -30,23 +32,18 @@ def test_get_performances_logistic_regression_wrong_authentication():
 
 
 def test_get_performances_logistic_regression_authenticated():
+    """ Check that an authenticated and valid request returns a status_code 200
+    """
     response = requests.get(
         url='http://127.0.0.1:8000/performances/logistic_regression',
         auth = HTTPBasicAuth(test_user["username"], test_user["password"])
         )
     assert response.status_code == 200
     
-def test_get_performances_logistic_regression_authenticated_range_metrics():
-    response = requests.get(
-        url='http://127.0.0.1:8000/performances/logistic_regression',
-        auth = HTTPBasicAuth(test_user["username"], test_user["password"])
-        )
-    performances_list = [response.json()[metric] for metric in performances_metrics_measured]
-
-    assert response.status_code == 200
-    assert check_metrics_value_range(performances_list)
-
 def test_check_returned_metrics_are_in_expected_list_of_metrics_logistic_regression():
+    """ Check that the response is a json and that the keys (which are the metrics used to rate the model) are indeed in the
+    list of expected metrics (performances_metrics_measured defined at the top of the file)
+    """
     response = requests.get(
         url='http://127.0.0.1:8000/performances/logistic_regression',
         auth = HTTPBasicAuth(test_user["username"], test_user["password"])
@@ -56,6 +53,19 @@ def test_check_returned_metrics_are_in_expected_list_of_metrics_logistic_regress
 
     assert response.status_code == 200
     assert check_metrics_list_returned(response_keys)
+
+def test_get_performances_logistic_regression_authenticated_range_metrics():
+    """ Check that the response is a json and that the values are indeed in within the range of expected results (between
+    0 and 1 based on the way these are mathematically calculated)
+    """
+    response = requests.get(
+        url='http://127.0.0.1:8000/performances/logistic_regression',
+        auth = HTTPBasicAuth(test_user["username"], test_user["password"])
+        )
+    performances_list = [response.json()[metric] for metric in performances_metrics_measured]
+
+    assert response.status_code == 200
+    assert check_metrics_value_range(performances_list)
 
 
 #DECISION TREE CLASSIFIER
@@ -69,6 +79,8 @@ def test_get_performances_decision_tree_classifier_not_authenticated():
     assert response.json() == {"detail":"Not authenticated"}
 
 def test_get_performances_decision_tree_classifier_wrong_authentication():
+    """ Check that a wrong username/password combination is successfully caught
+    """
     response = requests.get(
         url='http://127.0.0.1:8000/performances/decision_tree_classifier',
         auth = HTTPBasicAuth(test_user["username"], "wrong password")
@@ -78,23 +90,18 @@ def test_get_performances_decision_tree_classifier_wrong_authentication():
 
 
 def test_get_performances_decision_tree_classifier_authenticated():
+    """ Check that an authenticated and valid request returns a status_code 200
+    """
     response = requests.get(
         url='http://127.0.0.1:8000/performances/decision_tree_classifier',
         auth = HTTPBasicAuth(test_user["username"], test_user["password"])
         )
     assert response.status_code == 200
-    
-def test_get_performances_decision_tree_classifier_authenticated_range_metrics():
-    response = requests.get(
-        url='http://127.0.0.1:8000/performances/decision_tree_classifier',
-        auth = HTTPBasicAuth(test_user["username"], test_user["password"])
-        )
-    performances_list = [response.json()[metric] for metric in performances_metrics_measured]
-
-    assert response.status_code == 200
-    assert check_metrics_value_range(performances_list)
 
 def test_check_returned_metrics_are_in_expected_list_of_metrics_decision_tree_classifier():
+    """ Check that the response is a json and that the keys (which are the metrics used to rate the model) are indeed in the
+    list of expected metrics (performances_metrics_measured defined at the top of the file)
+    """
     response = requests.get(
         url='http://127.0.0.1:8000/performances/decision_tree_classifier',
         auth = HTTPBasicAuth(test_user["username"], test_user["password"])
@@ -104,6 +111,20 @@ def test_check_returned_metrics_are_in_expected_list_of_metrics_decision_tree_cl
 
     assert response.status_code == 200
     assert check_metrics_list_returned(response_keys)
+
+def test_get_performances_decision_tree_classifier_authenticated_range_metrics():
+    """ Check that the response is a json and that the values are indeed in within the range of expected results (between
+    0 and 1 based on the way these are mathematically calculated)
+    """
+    response = requests.get(
+        url='http://127.0.0.1:8000/performances/decision_tree_classifier',
+        auth = HTTPBasicAuth(test_user["username"], test_user["password"])
+        )
+    performances_list = [response.json()[metric] for metric in performances_metrics_measured]
+
+    assert response.status_code == 200
+    assert check_metrics_value_range(performances_list)
+
 
 #MULTINOMIAL_NB
 def test_get_performances_multinomial_nb_not_authenticated():
@@ -116,6 +137,8 @@ def test_get_performances_multinomial_nb_not_authenticated():
     assert response.json() == {"detail":"Not authenticated"}
 
 def test_get_performances_multinomial_nb_wrong_authentication():
+    """ Check that a wrong username/password combination is successfully caught
+    """
     response = requests.get(
         url='http://127.0.0.1:8000/performances/multinomial_nb',
         auth = HTTPBasicAuth(test_user["username"], "wrong password")
@@ -125,24 +148,18 @@ def test_get_performances_multinomial_nb_wrong_authentication():
 
 
 def test_get_performances_multinomial_nb_authenticated():
+    """ Check that an authenticated and valid request returns a status_code 200
+    """
     response = requests.get(
         url='http://127.0.0.1:8000/performances/multinomial_nb',
         auth = HTTPBasicAuth(test_user["username"], test_user["password"])
         )
     assert response.status_code == 200
     
-def test_get_performances_multinomial_nb_authenticated_range_metrics():
-    response = requests.get(
-        url='http://127.0.0.1:8000/performances/multinomial_nb',
-        auth = HTTPBasicAuth(test_user["username"], test_user["password"])
-        )
-    performances_list = [response.json()[metric] for metric in performances_metrics_measured]
-
-    assert response.status_code == 200
-    assert check_metrics_value_range(performances_list)
-
-
 def test_check_returned_metrics_are_in_expected_list_of_metrics_multinomial_nb():
+    """ Check that the response is a json and that the keys (which are the metrics used to rate the model) are indeed in the
+    list of expected metrics (performances_metrics_measured defined at the top of the file)
+    """
     response = requests.get(
         url='http://127.0.0.1:8000/performances/multinomial_nb',
         auth = HTTPBasicAuth(test_user["username"], test_user["password"])
@@ -152,6 +169,19 @@ def test_check_returned_metrics_are_in_expected_list_of_metrics_multinomial_nb()
 
     assert response.status_code == 200
     assert check_metrics_list_returned(response_keys)
+
+def test_get_performances_multinomial_nb_authenticated_range_metrics():
+    """ Check that the response is a json and that the values are indeed in within the range of expected results (between
+    0 and 1 based on the way these are mathematically calculated)
+    """
+    response = requests.get(
+        url='http://127.0.0.1:8000/performances/multinomial_nb',
+        auth = HTTPBasicAuth(test_user["username"], test_user["password"])
+        )
+    performances_list = [response.json()[metric] for metric in performances_metrics_measured]
+
+    assert response.status_code == 200
+    assert check_metrics_value_range(performances_list)
 
 #STOCHASTIC GRADIENT CLASSIFIER
 def test_get_performances_sgd_classifier_not_authenticated():
@@ -164,6 +194,8 @@ def test_get_performances_sgd_classifier_not_authenticated():
     assert response.json() == {"detail":"Not authenticated"}
 
 def test_get_performances_sgd_classifier_wrong_authentication():
+    """ Check that a wrong username/password combination is successfully caught
+    """
     response = requests.get(
         url='http://127.0.0.1:8000/performances/sgd_classifier',
         auth = HTTPBasicAuth(test_user["username"], "wrong password")
@@ -173,23 +205,18 @@ def test_get_performances_sgd_classifier_wrong_authentication():
 
 
 def test_get_performances_sgd_classifier_authenticated():
+    """ Check that an authenticated and valid request returns a status_code 200
+    """
     response = requests.get(
         url='http://127.0.0.1:8000/performances/sgd_classifier',
         auth = HTTPBasicAuth(test_user["username"], test_user["password"])
         )
     assert response.status_code == 200
-    
-def test_get_performances_sgd_classifier_authenticated_range_metrics():
-    response = requests.get(
-        url='http://127.0.0.1:8000/performances/sgd_classifier',
-        auth = HTTPBasicAuth(test_user["username"], test_user["password"])
-        )
-    performances_list = [response.json()[metric] for metric in performances_metrics_measured]
-
-    assert response.status_code == 200
-    assert check_metrics_value_range(performances_list)
 
 def test_check_returned_metrics_are_in_expected_list_of_metrics_sgd_classifier():
+    """ Check that the response is a json and that the keys (which are the metrics used to rate the model) are indeed in the
+    list of expected metrics (performances_metrics_measured defined at the top of the file)
+    """
     response = requests.get(
         url='http://127.0.0.1:8000/performances/sgd_classifier',
         auth = HTTPBasicAuth(test_user["username"], test_user["password"])
@@ -199,3 +226,16 @@ def test_check_returned_metrics_are_in_expected_list_of_metrics_sgd_classifier()
 
     assert response.status_code == 200
     assert check_metrics_list_returned(response_keys)
+
+def test_get_performances_sgd_classifier_authenticated_range_metrics():
+    """ Check that the response is a json and that the values are indeed in within the range of expected results (between
+    0 and 1 based on the way these are mathematically calculated)
+    """
+    response = requests.get(
+        url='http://127.0.0.1:8000/performances/sgd_classifier',
+        auth = HTTPBasicAuth(test_user["username"], test_user["password"])
+        )
+    performances_list = [response.json()[metric] for metric in performances_metrics_measured]
+
+    assert response.status_code == 200
+    assert check_metrics_value_range(performances_list)
