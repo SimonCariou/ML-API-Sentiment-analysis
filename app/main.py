@@ -79,7 +79,6 @@ async def get_sgdc_rating(sentence: str, isAuthenticated: bool = Depends(get_aut
     return predict_sentence_rating(sgdc_model, sentence)
 
 
-
 #GET the performances of the different models
 @api.get("/performances/logistic_regression", responses=responses, name="Get the performances of the logistic regression model on the trained dataset.")
 async def get_logreg_performances(isAuthenticated: bool = Depends(get_auth_status)):
