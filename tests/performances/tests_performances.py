@@ -9,13 +9,15 @@ test_user = {
 
 performances_metrics_measured = ["accuracy_score", "f1_score", "recall_score", "precision_score"]
 
+address = "127.0.0.1"
+port = "8001"
 
 #LOGISTIC REGRESSION
 def test_get_performances_logistic_regression_not_authenticated():
     """ Check that a non authenticated call is successfully caught
     """
     response = requests.get(
-        url='http://127.0.0.1:8000/performances/logistic_regression'
+        url='http://{api_address}:{api_port}/performances/logistic_regression'.format(api_address = address, api_port = port) 
     )
     assert response.status_code == 401
     assert response.json() == {"detail":"Not authenticated"}
@@ -24,7 +26,7 @@ def test_get_performances_logistic_regression_wrong_authentication():
     """ Check that a wrong username/password combination is successfully caught
     """
     response = requests.get(
-        url='http://127.0.0.1:8000/performances/logistic_regression',
+        url='http://{api_address}:{api_port}/performances/logistic_regression'.format(api_address = address, api_port = port),
         auth = HTTPBasicAuth(test_user["username"], "wrong password")
         )
     assert response.status_code == 401
@@ -35,7 +37,7 @@ def test_get_performances_logistic_regression_authenticated():
     """ Check that an authenticated and valid request returns a status_code 200
     """
     response = requests.get(
-        url='http://127.0.0.1:8000/performances/logistic_regression',
+        url='http://{api_address}:{api_port}/performances/logistic_regression'.format(api_address = address, api_port = port),
         auth = HTTPBasicAuth(test_user["username"], test_user["password"])
         )
     assert response.status_code == 200
@@ -45,7 +47,7 @@ def test_check_returned_metrics_are_in_expected_list_of_metrics_logistic_regress
     list of expected metrics (performances_metrics_measured defined at the top of the file)
     """
     response = requests.get(
-        url='http://127.0.0.1:8000/performances/logistic_regression',
+        url='http://{api_address}:{api_port}/performances/logistic_regression'.format(api_address = address, api_port = port),
         auth = HTTPBasicAuth(test_user["username"], test_user["password"])
         )
     
@@ -59,7 +61,7 @@ def test_get_performances_logistic_regression_authenticated_range_metrics():
     0 and 1 based on the way these are mathematically calculated)
     """
     response = requests.get(
-        url='http://127.0.0.1:8000/performances/logistic_regression',
+        url='http://{api_address}:{api_port}/performances/logistic_regression'.format(api_address = address, api_port = port),
         auth = HTTPBasicAuth(test_user["username"], test_user["password"])
         )
     performances_list = [response.json()[metric] for metric in performances_metrics_measured]
@@ -73,7 +75,7 @@ def test_get_performances_decision_tree_classifier_not_authenticated():
     """ Check that a non authenticated call is successfully caught
     """
     response = requests.get(
-        url='http://127.0.0.1:8000/performances/decision_tree_classifier'
+        url='http://{api_address}:{api_port}/performances/decision_tree_classifier'.format(api_address = address, api_port = port)
     )
     assert response.status_code == 401
     assert response.json() == {"detail":"Not authenticated"}
@@ -82,7 +84,7 @@ def test_get_performances_decision_tree_classifier_wrong_authentication():
     """ Check that a wrong username/password combination is successfully caught
     """
     response = requests.get(
-        url='http://127.0.0.1:8000/performances/decision_tree_classifier',
+        url='http://{api_address}:{api_port}/performances/decision_tree_classifier'.format(api_address = address, api_port = port),
         auth = HTTPBasicAuth(test_user["username"], "wrong password")
         )
     assert response.status_code == 401
@@ -93,7 +95,7 @@ def test_get_performances_decision_tree_classifier_authenticated():
     """ Check that an authenticated and valid request returns a status_code 200
     """
     response = requests.get(
-        url='http://127.0.0.1:8000/performances/decision_tree_classifier',
+        url='http://{api_address}:{api_port}/performances/decision_tree_classifier'.format(api_address = address, api_port = port),
         auth = HTTPBasicAuth(test_user["username"], test_user["password"])
         )
     assert response.status_code == 200
@@ -103,7 +105,7 @@ def test_check_returned_metrics_are_in_expected_list_of_metrics_decision_tree_cl
     list of expected metrics (performances_metrics_measured defined at the top of the file)
     """
     response = requests.get(
-        url='http://127.0.0.1:8000/performances/decision_tree_classifier',
+        url='http://{api_address}:{api_port}/performances/decision_tree_classifier'.format(api_address = address, api_port = port),
         auth = HTTPBasicAuth(test_user["username"], test_user["password"])
         )
     
@@ -117,7 +119,7 @@ def test_get_performances_decision_tree_classifier_authenticated_range_metrics()
     0 and 1 based on the way these are mathematically calculated)
     """
     response = requests.get(
-        url='http://127.0.0.1:8000/performances/decision_tree_classifier',
+        url='http://{api_address}:{api_port}/performances/decision_tree_classifier'.format(api_address = address, api_port = port),
         auth = HTTPBasicAuth(test_user["username"], test_user["password"])
         )
     performances_list = [response.json()[metric] for metric in performances_metrics_measured]
@@ -131,7 +133,7 @@ def test_get_performances_multinomial_nb_not_authenticated():
     """ Check that a non authenticated call is successfully caught
     """
     response = requests.get(
-        url='http://127.0.0.1:8000/performances/multinomial_nb'
+        url='http://{api_address}:{api_port}/performances/multinomial_nb'.format(api_address = address, api_port = port)
     )
     assert response.status_code == 401
     assert response.json() == {"detail":"Not authenticated"}
@@ -140,7 +142,7 @@ def test_get_performances_multinomial_nb_wrong_authentication():
     """ Check that a wrong username/password combination is successfully caught
     """
     response = requests.get(
-        url='http://127.0.0.1:8000/performances/multinomial_nb',
+        url='http://{api_address}:{api_port}/performances/multinomial_nb'.format(api_address = address, api_port = port),
         auth = HTTPBasicAuth(test_user["username"], "wrong password")
         )
     assert response.status_code == 401
@@ -151,7 +153,7 @@ def test_get_performances_multinomial_nb_authenticated():
     """ Check that an authenticated and valid request returns a status_code 200
     """
     response = requests.get(
-        url='http://127.0.0.1:8000/performances/multinomial_nb',
+        url='http://{api_address}:{api_port}/performances/multinomial_nb'.format(api_address = address, api_port = port),
         auth = HTTPBasicAuth(test_user["username"], test_user["password"])
         )
     assert response.status_code == 200
@@ -161,7 +163,7 @@ def test_check_returned_metrics_are_in_expected_list_of_metrics_multinomial_nb()
     list of expected metrics (performances_metrics_measured defined at the top of the file)
     """
     response = requests.get(
-        url='http://127.0.0.1:8000/performances/multinomial_nb',
+        url='http://{api_address}:{api_port}/performances/multinomial_nb'.format(api_address = address, api_port = port),
         auth = HTTPBasicAuth(test_user["username"], test_user["password"])
         )
     
@@ -175,7 +177,7 @@ def test_get_performances_multinomial_nb_authenticated_range_metrics():
     0 and 1 based on the way these are mathematically calculated)
     """
     response = requests.get(
-        url='http://127.0.0.1:8000/performances/multinomial_nb',
+        url='http://{api_address}:{api_port}/performances/multinomial_nb'.format(api_address = address, api_port = port),
         auth = HTTPBasicAuth(test_user["username"], test_user["password"])
         )
     performances_list = [response.json()[metric] for metric in performances_metrics_measured]
@@ -188,7 +190,7 @@ def test_get_performances_sgd_classifier_not_authenticated():
     """ Check that a non authenticated call is successfully caught
     """
     response = requests.get(
-        url='http://127.0.0.1:8000/performances/sgd_classifier'
+        url='http://{api_address}:{api_port}/performances/sgd_classifier'.format(api_address = address, api_port = port)
     )
     assert response.status_code == 401
     assert response.json() == {"detail":"Not authenticated"}
@@ -197,7 +199,7 @@ def test_get_performances_sgd_classifier_wrong_authentication():
     """ Check that a wrong username/password combination is successfully caught
     """
     response = requests.get(
-        url='http://127.0.0.1:8000/performances/sgd_classifier',
+        url='http://{api_address}:{api_port}/performances/sgd_classifier'.format(api_address = address, api_port = port),
         auth = HTTPBasicAuth(test_user["username"], "wrong password")
         )
     assert response.status_code == 401
@@ -208,7 +210,7 @@ def test_get_performances_sgd_classifier_authenticated():
     """ Check that an authenticated and valid request returns a status_code 200
     """
     response = requests.get(
-        url='http://127.0.0.1:8000/performances/sgd_classifier',
+        url='http://{api_address}:{api_port}/performances/sgd_classifier'.format(api_address = address, api_port = port),
         auth = HTTPBasicAuth(test_user["username"], test_user["password"])
         )
     assert response.status_code == 200
@@ -218,7 +220,7 @@ def test_check_returned_metrics_are_in_expected_list_of_metrics_sgd_classifier()
     list of expected metrics (performances_metrics_measured defined at the top of the file)
     """
     response = requests.get(
-        url='http://127.0.0.1:8000/performances/sgd_classifier',
+        url='http://{api_address}:{api_port}/performances/sgd_classifier'.format(api_address = address, api_port = port),
         auth = HTTPBasicAuth(test_user["username"], test_user["password"])
         )
     
@@ -232,7 +234,7 @@ def test_get_performances_sgd_classifier_authenticated_range_metrics():
     0 and 1 based on the way these are mathematically calculated)
     """
     response = requests.get(
-        url='http://127.0.0.1:8000/performances/sgd_classifier',
+        url='http://{api_address}:{api_port}/performances/sgd_classifier'.format(api_address = address, api_port = port),
         auth = HTTPBasicAuth(test_user["username"], test_user["password"])
         )
     performances_list = [response.json()[metric] for metric in performances_metrics_measured]
