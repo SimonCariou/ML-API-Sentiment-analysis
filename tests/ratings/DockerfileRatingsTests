@@ -1,0 +1,10 @@
+FROM debian:latest
+
+RUN apt-get update && apt-get install python3-pip -y && pip3 install requests && pip3 install pytest
+
+ADD tests_ratings.py /home/api_tests/ratings/tests_ratings.py
+ADD utils.py /home/api_tests/ratings/utils.py
+
+WORKDIR /home/api_tests/ratings
+
+CMD python3 -m pytest tests_ratings.py
