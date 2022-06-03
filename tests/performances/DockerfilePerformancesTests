@@ -7,4 +7,4 @@ ADD utils.py /home/api_tests/performances/utils.py
 
 WORKDIR /home/api_tests/performances
 
-CMD sleep 5 && python3 -m pytest tests_performances.py
+CMD python3 -m pytest tests_performances.py

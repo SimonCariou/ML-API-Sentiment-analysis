@@ -17,7 +17,7 @@ sentences = {
 
 
 address = "127.0.0.1"
-port = "8001"
+port = "8000"
 
 def test_get_root_result():
     response = requests.get(

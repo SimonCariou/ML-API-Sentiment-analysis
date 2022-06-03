@@ -10,7 +10,7 @@ test_user = {
 performances_metrics_measured = ["accuracy_score", "f1_score", "recall_score", "precision_score"]
 
 address = "127.0.0.1"
-port = "8001"
+port = "8000"
 
 #LOGISTIC REGRESSION
 def test_get_performances_logistic_regression_not_authenticated():

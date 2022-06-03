@@ -1,6 +1,6 @@
 FROM debian:latest
 
-RUN apt-get update && apt-get install python3-pip -y
+RUN apt-get update && apt-get install python3-pip -y && apt-get install curl -y
 
 WORKDIR /home/api
 

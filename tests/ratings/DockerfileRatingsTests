@@ -7,4 +7,4 @@ ADD utils.py /home/api_tests/ratings/utils.py
 
 WORKDIR /home/api_tests/ratings
 
-CMD sleep 5 && python3 -m pytest tests_ratings.py
+CMD python3 -m pytest tests_ratings.py
