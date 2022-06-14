@@ -1,0 +1,10 @@
+FROM debian:latest
+
+RUN apt-get update && apt-get install python3-pip -y && pip3 install requests && pip3 install pytest
+
+ADD tests_sentiment.py /home/api_tests/sentiment/tests_sentiment.py
+ADD utils.py /home/api_tests/sentiment/utils.py
+
+WORKDIR /home/api_tests/sentiment
+
+CMD python3 -m pytest tests_sentiment.py

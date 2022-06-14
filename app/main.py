@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException, Request, status, Depends
 from fastapi.responses import JSONResponse
 
-from app.auth.auth_rules import get_auth_status, get_admin_auth_status
+from app.auth.auth_rules import get_auth_status
 import joblib
 import os
 
@@ -20,7 +20,7 @@ responses = {
 
 api = FastAPI(
     title='ML API - Sentiment Analysis',
-    description="Gives a score to a text review. The score ranges from 1 to 5; 1 being the most negative.",
+    description="Gives a sentiment to a text review. The sentiment is either 0 (negative sentence) or 1 (positive sentence)",
     version="1.0.0"
 )
 
@@ -39,16 +39,16 @@ sgdc_performances = joblib.load(os.path.join(PERFORMANCES_DIRECTORY, SGDC_PERF_F
 # Load the vectorizer
 tfidf_vectorizer = joblib.load(os.path.join(MODELS_DIRECTORY, TFIDF_VECTORIZER_FILEMANE))
 
-def predict_sentence_rating(model, sentence):
-    """ This function calculates the rating of a given sentence based on the specified model. The rating ranges from 1 to 5 where 1 corresponds to a negative sentence and 5 is a positive one.
-    Input: Machine learning trained model (logistic regression, multinomialNB...)and the sentence (string) which we want to calculate the rating.
-    Output: The rating calculated by the provided model
+def predict_sentence_sentiment(model, sentence):
+    """ This function calculates the sentiment of a given sentence based on the specified model. The sentiment is either 0 or 1 depending on if the sentence is estimated, respectively, negative or positive.
+    Input: Machine learning trained model (logistic regression, multinomialNB...)and the sentence (string) which we want to calculate the sentiment.
+    Output: The sentiment calculated by the provided model
     """
     preprocessed_sentence = finalize_preprocess(sentence)
     transformed_sentence = tfidf_vectorizer.transform([preprocessed_sentence])
     return {
-        "Sentence": sentence,
-        "Ratings": model.predict(transformed_sentence)[0].tolist()
+        "sentence": sentence,
+        "sentiment": model.predict(transformed_sentence)[0].tolist()
     }
 
 
@@ -61,22 +61,22 @@ async def get_root():
     return {"Status": "The API is running"}
 
 
-#GET the rating of a given sentence via 5 different ML models.
-@api.get("/ratings/logistic_regression", responses=responses, name="Get the rating of a sentence calculated by the logistic regression model.")
+#GET the sentiment of a given sentence via 5 different ML models.
+@api.get("/sentiment/logistic_regression", responses=responses, name="Get the sentiment (Positive: 1 or Negative: 0) of a sentence calculated by the logistic regression model.")
 async def get_logreg_ratin(sentence: str, isAuthenticated: bool = Depends(get_auth_status)):
-    return predict_sentence_rating(log_reg_model, sentence)
+    return predict_sentence_sentiment(log_reg_model, sentence)
 
-@api.get("/ratings/decision_tree_classifier", responses=responses, name="Get the rating of a sentence calculated by the decision tree classifier model.")
-async def get_dec_tree_rating(sentence: str, isAuthenticated: bool = Depends(get_auth_status)):
-    return predict_sentence_rating(dec_tree_model, sentence)
+@api.get("/sentiment/decision_tree_classifier", responses=responses, name="Get the sentiment (Positive: 1 or Negative: 0) of a sentence calculated by the decision tree classifier model.")
+async def get_dec_tree_sentiment(sentence: str, isAuthenticated: bool = Depends(get_auth_status)):
+    return predict_sentence_sentiment(dec_tree_model, sentence)
 
-@api.get("/ratings/multinomial_nb", responses=responses, name="Get the rating of a sentence calculated by the Multinomial Naive Bayes model.")
-async def get_multinomial_nb_rating(sentence: str, isAuthenticated: bool = Depends(get_auth_status)):
-    return predict_sentence_rating(multi_nb_model, sentence)
+@api.get("/sentiment/multinomial_nb", responses=responses, name="Get the sentiment (Positive: 1 or Negative: 0) of a sentence calculated by the Multinomial Naive Bayes model.")
+async def get_multinomial_nb_sentiment(sentence: str, isAuthenticated: bool = Depends(get_auth_status)):
+    return predict_sentence_sentiment(multi_nb_model, sentence)
 
-@api.get("/ratings/sgd_classifier", responses=responses, name="Get the rating of a sentence calculated by the Stochastic Gradient model.")
-async def get_sgdc_rating(sentence: str, isAuthenticated: bool = Depends(get_auth_status)):
-    return predict_sentence_rating(sgdc_model, sentence)
+@api.get("/sentiment/sgd_classifier", responses=responses, name="Get the sentiment (Positive: 1 or Negative: 0) of a sentence calculated by the Stochastic Gradient model.")
+async def get_sgdc_sentiment(sentence: str, isAuthenticated: bool = Depends(get_auth_status)):
+    return predict_sentence_sentiment(sgdc_model, sentence)
 
 
 #GET the performances of the different models
