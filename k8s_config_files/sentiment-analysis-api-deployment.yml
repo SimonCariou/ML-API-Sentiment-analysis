@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ml-sentiment-analysis-deployment
+  labels:
+    app: api-sentiment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: api-sentiment
+  template:
+    metadata:
+      labels:
+        app: api-sentiment
+    spec:
+      containers:
+      - name: api-sentiment
+        image: simcariou/api-sentiment:latest
+        ports:
+        - containerPort: 8000
+      imagePullSecrets:
+      - name: registrypullsecret
