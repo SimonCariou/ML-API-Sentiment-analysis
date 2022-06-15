@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ml-sentiment-analysis-service
+  labels:
+    app: api-sentiment
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8001
+    protocol: TCP
+    targetPort: 8000
+  selector:
+    app: api-sentiment

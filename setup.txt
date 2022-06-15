@@ -1,0 +1,22 @@
+Here are the list of useful commands that one may find useful.
+
+In order to build the api container alone:
+> docker image build -t api-sentiment:latest .
+
+And run the API container
+> docker run --network="host" api-sentiment:latest
+
+Or launch all the containers (API + tests) using docker-compose:
+> docker-compose up --build
+
+
+
+
+
+To create Kubernetes configuration files run the following:
+> cd k8s_conf_files
+> kubectl create -f registry-pull-secret.yml      
+> kubectl create -f sentiment-analysis-api-deployment.yml                       
+> kubectl create -f sentiment-analysis-api-service.yml
+> kubectl create -f sentiment-analysis-api-ingress.yml
+> kubectl create -f sentiment-analysis-api-.yml
