@@ -106,8 +106,8 @@ Chaque endpoint “performances” est testé. Une vérification est réalisée 
 Les images de l’API et des tests sont insérées dans des containers lancés à l’aide de Docker Compose (`docker-compose.yml`):
 - Lancement de 3 containers:
     - **API**:
-        - *image API*: ml-api-sentiment-analysis
-        - *container API*: my_api_sentiment_analysis
+        - *image API*: api-sentiment
+        - *container API*: api-sentiment
     - **Test API - Sentiment prediction**:
         - *image test*: tests-api-sentiment
         - *container test*: tests-api-sentiment
